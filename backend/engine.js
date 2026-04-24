@@ -42,19 +42,18 @@ function buildGraph(validEdges) {
   return { children, parent, allNodes };
 }
 
-function findRoots(allNodes, parent) {
-  const roots = [];
-  for (const node of allNodes) {
-    if (!parent.has(node)) {
-      roots.push(node);
+function getComponentNodes(startNode, children) {
+  const visited = new Set();
+  const stack = [startNode];
+  while (stack.length) {
+    const node = stack.pop();
+    if (visited.has(node)) continue;
+    visited.add(node);
+    for (const child of (children.get(node) || [])) {
+      stack.push(child);
     }
   }
-  roots.sort();
-  if (roots.length === 0) {
-    const fallback = Array.from(allNodes).sort()[0];
-    if (fallback) roots.push(fallback);
-  }
-  return roots;
+  return visited;
 }
 
 function hasCycleFromNode(startNode, children) {
@@ -129,7 +128,25 @@ function processHierarchy(data) {
 
   const { validEdges, duplicateEdges } = deduplicateEdges(potentiallyValidRaw);
   const { children, parent, allNodes } = buildGraph(validEdges);
-  const roots = findRoots(allNodes, parent);
+
+  const assignedNodes = new Set();
+  const rootsToProcess = [];
+
+  const trueRoots = Array.from(allNodes).filter(n => !parent.has(n)).sort();
+  for (const root of trueRoots) {
+    const component = getComponentNodes(root, children);
+    for (const node of component) assignedNodes.add(node);
+    rootsToProcess.push(root);
+  }
+
+  for (const node of Array.from(allNodes).sort()) {
+    if (!assignedNodes.has(node)) {
+      const component = getComponentNodes(node, children);
+      for (const n of component) assignedNodes.add(n);
+      const fallbackRoot = Array.from(component).sort()[0];
+      rootsToProcess.push(fallbackRoot);
+    }
+  }
 
   const hierarchies = [];
   let totalTrees = 0;
@@ -137,7 +154,7 @@ function processHierarchy(data) {
   let largestTreeRoot = null;
   let largestTreeSize = -1;
 
-  for (const root of roots) {
+  for (const root of rootsToProcess) {
     const cycleDetected = hasCycleFromNode(root, children);
     if (cycleDetected) {
       totalCycles++;
