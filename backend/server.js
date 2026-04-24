@@ -9,7 +9,7 @@ app.use(cors());
 app.use(express.json());
 
 const IDENTITY = {
-  user_id: 'john_doe_01012000',
+  user_id: '',
   email_id: 'user@example.com',
   college_roll_number: 'ROLL001',
 };
