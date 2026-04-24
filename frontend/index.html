@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Hierarchy Processor — POST /bfhl</title>
+  <meta name="description" content="Process node edges into tree and cycle hierarchies via POST /bfhl." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css?v=3" />
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1>Hierarchy Processor</h1>
+      <p class="subtitle">Enter edges like <code>A-&gt;B</code> to detect trees and cycles · <span class="api-badge">POST /bfhl</span></p>
+    </header>
+    <section class="card" aria-label="Edge Input">
+      <label for="edge-input" class="field-label">Input Edges</label>
+      <p class="hint">One edge per line, comma-separated, or a JSON array like <code>["A-&gt;B","B-&gt;C"]</code>. Press <code>Ctrl+Enter</code> to submit.</p>
+      <textarea id="edge-input" placeholder='["A->B","A->C","B->D","X->Y","Y->Z","Z->X"]' spellcheck="false"></textarea>
+      <div class="actions">
+        <button id="submit-btn">⚡ Process</button>
+        <button id="clear-btn" class="ghost">Clear</button>
+      </div>
+    </section>
+    <div id="error-banner" role="alert" aria-live="polite"></div>
+    <section id="results-section" aria-label="Results">
+      <div class="summary-row">
+        <div class="stat-box">
+          <span class="stat-val" id="stat-trees">0</span>
+          <span class="stat-lbl">Trees</span>
+        </div>
+        <div class="stat-box">
+          <span class="stat-val" id="stat-cycles">0</span>
+          <span class="stat-lbl">Cycles</span>
+        </div>
+        <div class="stat-box">
+          <span class="stat-val" id="stat-largest">—</span>
+          <span class="stat-lbl">Largest Root</span>
+        </div>
+      </div>
+      <div id="hierarchies-grid"></div>
+    </section>
+  </div>
+  <script src="./app.js?v=3"></script>
+</body>
+</html>
