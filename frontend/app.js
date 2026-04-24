@@ -1,13 +1,13 @@
-const API_URL = 'http://localhost:3000/bfhl';
+const API_URL = "https://bfhl-hierarchy-api.vercel.app/";
 
-const edgeInput      = document.getElementById('edge-input');
-const submitBtn      = document.getElementById('submit-btn');
-const clearBtn       = document.getElementById('clear-btn');
-const errorBanner    = document.getElementById('error-banner');
+const edgeInput = document.getElementById('edge-input');
+const submitBtn = document.getElementById('submit-btn');
+const clearBtn = document.getElementById('clear-btn');
+const errorBanner = document.getElementById('error-banner');
 const resultsSection = document.getElementById('results-section');
-const statTrees      = document.getElementById('stat-trees');
-const statCycles     = document.getElementById('stat-cycles');
-const statLargest    = document.getElementById('stat-largest');
+const statTrees = document.getElementById('stat-trees');
+const statCycles = document.getElementById('stat-cycles');
+const statLargest = document.getElementById('stat-largest');
 const hierarchiesGrid = document.getElementById('hierarchies-grid');
 
 submitBtn.addEventListener('click', handleSubmit);
@@ -59,7 +59,7 @@ function parseInput(raw) {
     try {
       const parsed = JSON.parse(raw);
       if (Array.isArray(parsed)) return parsed.map(s => String(s));
-    } catch (_) {}
+    } catch (_) { }
     return null;
   }
   if (raw.includes(',') && !raw.includes('\n')) {
@@ -70,8 +70,8 @@ function parseInput(raw) {
 
 function renderResults(data) {
   const { hierarchies = [], summary = {} } = data;
-  statTrees.textContent   = summary.total_trees  ?? 0;
-  statCycles.textContent  = summary.total_cycles ?? 0;
+  statTrees.textContent = summary.total_trees ?? 0;
+  statCycles.textContent = summary.total_cycles ?? 0;
   statLargest.textContent = summary.largest_tree_root ?? '—';
   hierarchiesGrid.innerHTML = '';
   if (hierarchies.length === 0) {

@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -9,15 +10,18 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="style.css?v=3" />
 </head>
+
 <body>
   <div class="container">
     <header>
       <h1>Hierarchy Processor</h1>
-      <p class="subtitle">Enter edges like <code>A-&gt;B</code> to detect trees and cycles · <span class="api-badge">POST /bfhl</span></p>
+      <p class="subtitle">Enter edges like <code>A-&gt;B</code> to detect trees and cycles · <span
+          class="api-badge">POST /bfhl</span></p>
     </header>
     <section class="card" aria-label="Edge Input">
       <label for="edge-input" class="field-label">Input Edges</label>
-      <p class="hint">One edge per line, comma-separated, or a JSON array like <code>["A-&gt;B","B-&gt;C"]</code>. Press <code>Ctrl+Enter</code> to submit.</p>
+      <p class="hint">One edge per line, comma-separated, or a JSON array like <code>["A-&gt;B","B-&gt;C"]</code>. Press
+        <code>Ctrl+Enter</code> to submit.</p>
       <textarea id="edge-input" placeholder='["A->B","A->C","B->D","X->Y","Y->Z","Z->X"]' spellcheck="false"></textarea>
       <div class="actions">
         <button id="submit-btn">⚡ Process</button>
@@ -45,4 +49,5 @@
   </div>
   <script src="./app.js?v=3"></script>
 </body>
+
 </html>
