@@ -1,4 +1,4 @@
-const API_URL = "https://bfhl-hierarchy-api.vercel.app/";
+const API_URL = "https://bfhl-hierarchy-api.vercel.app/bfhl";
 
 const edgeInput = document.getElementById('edge-input');
 const submitBtn = document.getElementById('submit-btn');
