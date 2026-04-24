@@ -172,8 +172,8 @@ SRM Institute of Science and Technology
 
 📌 Submission Links
 
-- 🔗 Backend API: (Add after deployment)
-- 🔗 Frontend URL: (Add after deployment)
+- 🔗 Backend API: https://bfhl-hierarchy-api.vercel.app/
+- 🔗 Frontend URL: https://hierarchy-api-frontend.vercel.app/
 - 🔗 GitHub Repo: https://github.com/FelixMathew/bfhl-hierarchy-api
 
 ---
